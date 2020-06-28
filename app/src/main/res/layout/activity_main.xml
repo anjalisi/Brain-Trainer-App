@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="#57A3F4"
     android:paddingStart="20dp"
     android:paddingLeft="20dp"
     android:paddingTop="20dp"
@@ -70,7 +70,7 @@
 
         <Button
             android:id="@+id/button2"
-
+            android:onClick="chooseanswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -90,7 +90,7 @@
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:onClick="chooseanswer"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="1"
@@ -114,7 +114,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:layout_marginTop="5dp"
-
+            android:onClick="chooseanswer"
             android:layout_marginRight="5dp"
             android:background="#F8A5E862"
             android:fontFamily="monospace"
@@ -137,7 +137,8 @@
             android:fontFamily="monospace"
             android:tag="3"
             android:text="3"
-            android:textSize="70sp" />
+            android:textSize="70sp"
+            android:onClick="chooseanswer" />
     </GridLayout>
 
     <TextView
@@ -148,9 +149,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
         android:fontFamily="sans-serif-smallcaps"
-
-        android:text="Correct !"
-        android:textColor="#000000"
-        android:textSize="40sp" />
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="35sp" />
 
 </RelativeLayout>
