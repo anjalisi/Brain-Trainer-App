@@ -3,6 +3,7 @@ package com.example.braintrainerapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button startButton;
     //Making ArrayList to sote the options
     ArrayList<Integer> options= new ArrayList<Integer>();
-    TextView resultTextView;
+    TextView resultTextView,timerTextView;
     TextView pointsTextView,sumTextView;
     Button button0,button1,button2,button3;
     int locationOfCorrectAns;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         startButton=(Button)findViewById(R.id.startButton);
         resultTextView=(TextView)findViewById(R.id.resultTextView);
         pointsTextView=(TextView)findViewById(R.id.pointsTextView);
-
+        timerTextView=(TextView)findViewById(R.id.timerTextView);
         sumTextView=(TextView)findViewById(R.id.sumTextView);
         button0= (Button)findViewById(R.id.button2);
         button1= (Button)findViewById(R.id.button3);
@@ -95,6 +96,26 @@ public class MainActivity extends AppCompatActivity {
         button3= (Button)findViewById(R.id.button5);
 
         generateQuestion();
+
+        //We need to enable our counter too
+        new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                String time=Integer.toString((int) millisUntilFinished/1000);
+                if(millisUntilFinished/1000<=9)
+                    time="0"+time;
+                timerTextView.setText(time+"s");
+            }
+
+            @Override
+            public void onFinish() {
+                //After finishing, we have to show the final results
+
+                timerTextView.setText("00s");
+                resultTextView.setText("Your Score : "+Integer.toString(score)+"/"+Integer.toString(numberOfQuestions));
+            }
+        }.start(); //30s
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
