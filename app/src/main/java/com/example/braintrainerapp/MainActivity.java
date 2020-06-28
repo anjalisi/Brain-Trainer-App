@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TextView resultTextView,timerTextView;
     TextView pointsTextView,sumTextView;
     Button button0,button1,button2,button3,playAgainButton;
+    RelativeLayout gameRealtive;
     int locationOfCorrectAns;
     int score = 0;
     int numberOfQuestions = 0;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         generateQuestion();
         //We need to enable our counter too
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(30100, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 String time=Integer.toString((int) millisUntilFinished/1000);
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
     public void start(View view)
     {
         startButton.setVisibility(View.INVISIBLE);
+        gameRealtive.setVisibility(RelativeLayout.VISIBLE);
+        playAgain(findViewById(R.id.playAgainButton));
     }
 
     @Override
@@ -127,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
         button2= (Button)findViewById(R.id.button4);
         button3= (Button)findViewById(R.id.button5);
         playAgainButton=(Button)findViewById(R.id.playAgainButton);
+        gameRealtive=(RelativeLayout) findViewById(R.id.gameRelative);
         //generateQuestion();
-        playAgain(findViewById(R.id.playAgainButton));
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
