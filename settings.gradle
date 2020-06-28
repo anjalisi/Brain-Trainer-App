@@ -1,0 +1,2 @@
+rootProject.name='BrainTrainerApp'
+include ':app'
