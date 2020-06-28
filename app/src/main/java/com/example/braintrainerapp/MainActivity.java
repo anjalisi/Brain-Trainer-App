@@ -18,42 +18,15 @@ public class MainActivity extends AppCompatActivity {
     //Making ArrayList to sote the options
     ArrayList<Integer> options= new ArrayList<Integer>();
     TextView resultTextView;
+    TextView pointsTextView,sumTextView;
+    Button button0,button1,button2,button3;
     int locationOfCorrectAns;
-    int score=0;
+    int score = 0;
+    int numberOfQuestions = 0;
 
-    public void chooseanswer(View view)
+    //Method for generating new questions
+    public void generateQuestion()
     {
-        if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAns)))
-        {
-            Log.i("Correct",view.getTag().toString());
-            //Adding 1 to the score if the answer is correct
-            score++;
-            resultTextView.setText("Correct Answer !");
-        }
-        else
-        {
-            resultTextView.setText("Incorrect Answer !");
-        }
-    }
-
-    public void start(View view)
-    {
-        startButton.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        startButton=(Button)findViewById(R.id.startButton);
-        resultTextView=(TextView)findViewById(R.id.resultTextView);
-
-        TextView sumTextView=(TextView)findViewById(R.id.sumTextView);
-        Button button0= (Button)findViewById(R.id.button2);
-        Button button1= (Button)findViewById(R.id.button3);
-        Button button2= (Button)findViewById(R.id.button4);
-        Button button3= (Button)findViewById(R.id.button5);
-
         int incorrectAnswer;
         //Creating random numbers
         Random rand= new Random();
@@ -63,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         sumTextView.setText(Integer.toString(a)+" + "+Integer.toString(b));
 
         locationOfCorrectAns=rand.nextInt(4);   //0,1,2,3
+        //We need to clear our options ArrayList each time we make a new one
+        options.clear();
+
         for(int i=0; i<4; i++)
         {
             if(i==locationOfCorrectAns)
@@ -79,6 +55,46 @@ public class MainActivity extends AppCompatActivity {
         button1.setText(Integer.toString(options.get(1)));
         button2.setText(Integer.toString(options.get(2)));
         button3.setText(Integer.toString(options.get(3)));
+
+    }
+    public void chooseanswer(View view)
+    {
+        if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAns)))
+        {
+            Log.i("Correct",view.getTag().toString());
+            //Adding 1 to the score if the answer is correct
+            score++;
+            resultTextView.setText("Correct Answer !");
+        }
+        else
+        {
+            resultTextView.setText("Incorrect Answer !");
+        }
+        numberOfQuestions++;
+        pointsTextView.setText(Integer.toString(score)+"/"+Integer.toString(numberOfQuestions));
+        generateQuestion();
+    }
+
+    public void start(View view)
+    {
+        startButton.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        startButton=(Button)findViewById(R.id.startButton);
+        resultTextView=(TextView)findViewById(R.id.resultTextView);
+        pointsTextView=(TextView)findViewById(R.id.pointsTextView);
+
+        sumTextView=(TextView)findViewById(R.id.sumTextView);
+        button0= (Button)findViewById(R.id.button2);
+        button1= (Button)findViewById(R.id.button3);
+        button2= (Button)findViewById(R.id.button4);
+        button3= (Button)findViewById(R.id.button5);
+
+        generateQuestion();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
