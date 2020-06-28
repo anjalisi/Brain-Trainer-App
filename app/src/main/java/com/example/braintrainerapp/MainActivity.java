@@ -20,10 +20,42 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> options= new ArrayList<Integer>();
     TextView resultTextView,timerTextView;
     TextView pointsTextView,sumTextView;
-    Button button0,button1,button2,button3;
+    Button button0,button1,button2,button3,playAgainButton;
     int locationOfCorrectAns;
     int score = 0;
     int numberOfQuestions = 0;
+
+    //Adding Play Again Feature
+    public void playAgain(View view)
+    {
+        score=0;
+        numberOfQuestions=0;
+        timerTextView.setText("30s");
+        pointsTextView.setText("0/0");
+        resultTextView.setText("");
+        playAgainButton.setVisibility(View.INVISIBLE);
+
+        generateQuestion();
+        //We need to enable our counter too
+        new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                String time=Integer.toString((int) millisUntilFinished/1000);
+                if(millisUntilFinished/1000<=9)
+                    time="0"+time;
+                timerTextView.setText(time+"s");
+            }
+
+            @Override
+            public void onFinish() {
+                //After finishing, we have to show the final results
+                playAgainButton.setVisibility(View.VISIBLE);
+                timerTextView.setText("00s");
+                resultTextView.setText("Your Score : "+Integer.toString(score)+"/"+Integer.toString(numberOfQuestions));
+            }
+        }.start(); //30s
+
+    }
 
     //Method for generating new questions
     public void generateQuestion()
@@ -94,28 +126,9 @@ public class MainActivity extends AppCompatActivity {
         button1= (Button)findViewById(R.id.button3);
         button2= (Button)findViewById(R.id.button4);
         button3= (Button)findViewById(R.id.button5);
-
-        generateQuestion();
-
-        //We need to enable our counter too
-        new CountDownTimer(30000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                String time=Integer.toString((int) millisUntilFinished/1000);
-                if(millisUntilFinished/1000<=9)
-                    time="0"+time;
-                timerTextView.setText(time+"s");
-            }
-
-            @Override
-            public void onFinish() {
-                //After finishing, we have to show the final results
-
-                timerTextView.setText("00s");
-                resultTextView.setText("Your Score : "+Integer.toString(score)+"/"+Integer.toString(numberOfQuestions));
-            }
-        }.start(); //30s
-
+        playAgainButton=(Button)findViewById(R.id.playAgainButton);
+        //generateQuestion();
+        playAgain(findViewById(R.id.playAgainButton));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

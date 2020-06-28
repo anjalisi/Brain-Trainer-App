@@ -153,4 +153,20 @@
         android:textColor="#ffffff"
         android:textSize="35sp" />
 
+    <Button
+        android:id="@+id/playAgainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/resultTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:background="#000000"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:onClick="playAgain"
+        android:padding="15dp"
+        android:text="Play Again"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:visibility="invisible" />
+
 </RelativeLayout>
